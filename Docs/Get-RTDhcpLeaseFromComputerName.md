@@ -13,11 +13,11 @@ Gets DHCP lease information for the matching computer name.
 ## SYNTAX
 
 ```
-Get-RTDhcpLeaseFromComputerName [[-ComputerName] <String[]>] [[-DhcpServer] <String[]>]
+Get-RTDhcpLeaseFromComputerName [-ComputerName] <String[]> [[-DhcpServer] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Gets DHCP lease information for the matching computer name. If a DHCP server or array of DHCP servers is provided in the DhcpServer parameter, all leases in all scopes on the specified server(s) are searched. If no DHCP servers are provided in the DhcpServer parameter, all leases in all scopes on servers returned by Get-DhcpServerInDC are searched.
+A wrapper for the DhcpServer module's cmdlets to get DHCP lease information for the matching computer name. If a DHCP server or array of DHCP servers is provided in the DhcpServer parameter, all leases in all scopes on the specified server(s) are searched. If no DHCP servers are provided in the DhcpServer parameter, all leases in all scopes on servers returned by Get-DhcpServerInDC are searched.
 
 ## EXAMPLES
 
@@ -52,12 +52,12 @@ Name of the computer or computers you want to get lease information for.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases: cn
 
-Required: False
+Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -67,19 +67,21 @@ Name or IP address of the server or servers you want to search for lease informa
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases: Server
 
 Required: False
 Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-
 
 ## OUTPUTS
 
