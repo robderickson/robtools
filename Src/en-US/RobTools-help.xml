@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-RTDhcpLeaseFromComputerName</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>RTDhcpLeaseFromComputerName</command:noun>
+      <maml:description>
+        <maml:para>Gets DHCP lease information for the matching computer name.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>A wrapper for the DhcpServer module's cmdlets to get DHCP lease information for the matching computer name. If a DHCP server or array of DHCP servers is provided in the DhcpServer parameter, all leases in all scopes on the specified server(s) are searched. If no DHCP servers are provided in the DhcpServer parameter, all leases in all scopes on servers returned by Get-DhcpServerInDC are searched.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-RTDhcpLeaseFromComputerName</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="cn">
+          <maml:name>ComputerName</maml:name>
+          <maml:Description>
+            <maml:para>Name of the computer or computers you want to get lease information for.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Server">
+          <maml:name>DhcpServer</maml:name>
+          <maml:Description>
+            <maml:para>Name or IP address of the server or servers you want to search for lease information.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="cn">
+        <maml:name>ComputerName</maml:name>
+        <maml:Description>
+          <maml:para>Name of the computer or computers you want to get lease information for.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Server">
+        <maml:name>DhcpServer</maml:name>
+        <maml:Description>
+          <maml:para>Name or IP address of the server or servers you want to search for lease information.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1</maml:title>
+        <dev:code>PS C:\&gt; Get-RTDhcpLeaseFromComputerName -ComputerName windowslaptop
+
+IPAddress       ScopeId         ClientId             HostName             AddressState         LeaseExpiryTime
+---------       -------         --------             --------             ------------         ---------------
+10.0.0.15       10.0.0.0        ab-cd-ef-01-23-45    windowslaptop.con... Active               11/7/2017 11:38:53 AM
+10.1.1.38       10.1.1.0        fe-dc-ba-54-32-10    windowslaptop.con... Active               11/7/2017 10:12:23 AM</dev:code>
+        <dev:remarks>
+          <maml:para>Finds one or more leases in all scopes on all servers returned by Get-DhcpServerInDC where HostName matches 'windowslaptop.'</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2</maml:title>
+        <dev:code>PS C:\&gt; Get-RTDhcpLeaseFromComputerName -ComputerName windowswk -DhcpServer dhcp01
+
+IPAddress       ScopeId         ClientId             HostName             AddressState         LeaseExpiryTime
+---------       -------         --------             --------             ------------         ---------------
+10.0.0.47       10.0.0.0        90-78-56-ef-cd-ab    windowswk.contoso... Active               11/4/2017 8:32:17 AM</dev:code>
+        <dev:remarks>
+          <maml:para>Finds one or more leases in all scopes on the dhcp01 DHCP server where HostName matches 'windowswk.'</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-RTFreeSpace</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>RTFreeSpace</command:noun>
+      <maml:description>
+        <maml:para>Get free space of disks on the specified computer.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>A wrapper to query the Win32_LogicalDisk WMI class and report drive space of disks on the specified computer. By default, this command returns available space of all local disks on the specified computer.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-RTFreeSpace</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="cn">
+          <maml:name>ComputerName</maml:name>
+          <maml:Description>
+            <maml:para>Name of computer to get logical disk statistics from.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="DriveLetter">
+          <maml:name>DeviceID</maml:name>
+          <maml:Description>
+            <maml:para>ID of the logical disk to get statistics from (typically drive letter).</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+          <maml:name>DriveType</maml:name>
+          <maml:Description>
+            <maml:para>Integer representing type of logical disks to get statistics from.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="cn">
+        <maml:name>ComputerName</maml:name>
+        <maml:Description>
+          <maml:para>Name of computer to get logical disk statistics from.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="DriveLetter">
+        <maml:name>DeviceID</maml:name>
+        <maml:Description>
+          <maml:para>ID of the logical disk to get statistics from (typically drive letter).</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+        <maml:name>DriveType</maml:name>
+        <maml:Description>
+          <maml:para>Integer representing type of logical disks to get statistics from.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1</maml:title>
+        <dev:code>PS C:\&gt; Get-RTFreeSpace -ComputerName localhost
+
+Freespace    : 12.85
+Size         : 60.00
+ComputerName : localhost
+PercentFree  : 21 %
+DeviceID     : C:
+
+Freespace    : 9.88
+Size         : 10.00
+ComputerName : localhost
+PercentFree  : 99 %
+DeviceID     : D:</dev:code>
+        <dev:remarks>
+          <maml:para>Gets drive space statistics of all local disks on localhost.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2</maml:title>
+        <dev:code>PS C:\&gt; Get-RTFreeSpace -ComputerName localhost -DeviceID C:
+
+Freespace    : 12.85
+Size         : 60.00
+ComputerName : localhost
+PercentFree  : 21 %
+DeviceID     : C:</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2</maml:title>
+        <dev:code>PS C:\&gt; Get-RTFreeSpace -ComputerName localhost -DriveType 4
+
+Freespace    : 953.54
+Size         : 1,024.00
+ComputerName : localhost
+PercentFree  : 93 %
+DeviceID     : H:</dev:code>
+        <dev:remarks>
+          <maml:para>Gets drive space statistics of all network disks on localhost.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+</helpItems>

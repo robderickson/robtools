@@ -1,15 +1,19 @@
 ﻿function Get-RTFreeSpace {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true,
+            ValueFromPipeline=$true,
+            ValueFromPipelineByPropertyName=$true)]
         [Alias('cn')]
         [string[]]$ComputerName,
 
-        [Parameter()]
+        [Parameter(ValueFromPipeline=$true,
+            ValueFromPipelineByPropertyName=$true)]
         [Alias('DriveLetter')]
         [string]$DeviceID,
 
-        [Parameter()]
+        [Parameter(ValueFromPipeline=$true,
+            ValueFromPipelineByPropertyName=$true)]
         [string]$DriveType = 3
         
     )
