@@ -19,7 +19,7 @@
     PROCESS {
         foreach ($computer in $ComputerName) {
             $disks = Get-WmiObject -query "SELECT deviceid,freespace,size FROM win32_logicaldisk WHERE drivetype='$DriveType'" -ComputerName $computer |
-                select DeviceID,Freespace,Size,@{n='PercentFree';e={"{0:P0}" -f ($_.freespace / $_.size)}}
+                Select-Object DeviceID,Freespace,Size,@{n='PercentFree';e={"{0:P0}" -f ($_.freespace / $_.size)}}
             
             if ($DeviceID) {
                 $disks = $disks | Where-Object {$_.DeviceID -eq $DeviceID}
