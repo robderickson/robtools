@@ -9,11 +9,6 @@
 
         [Parameter(ValueFromPipeline=$true,
             ValueFromPipelineByPropertyName=$true)]
-        [Alias('DriveLetter')]
-        [string]$DeviceID,
-
-        [Parameter(ValueFromPipeline=$true,
-            ValueFromPipelineByPropertyName=$true)]
         [string]$DriveType = 3
         
     )
@@ -22,23 +17,20 @@
 
     PROCESS {
         foreach ($computer in $ComputerName) {
-            $disks = Get-WmiObject -query "SELECT deviceid,freespace,size FROM win32_logicaldisk WHERE drivetype='$DriveType'" -ComputerName $computer |
-                Select-Object DeviceID,Freespace,Size,@{n='PercentFree';e={"{0:P0}" -f ($_.freespace / $_.size)}}
-            
-            if ($DeviceID) {
-                $disks = $disks | Where-Object {$_.DeviceID -eq $DeviceID}
+            $CimInstanceSplat = @{
+                CimSession = New-CimSession -ComputerName $computer
+                Query = "SELECT Capacity,FreeSpace,SystemName,Name FROM Win32_Volume WHERE drivetype='$DriveType'"
             }
+            $volumes = Get-CimInstance @CimInstanceSplat
 
-            foreach ($disk in $disks) {
-                $info = @{
-                    ComputerName = $computer
-                    DeviceID = $disk.DeviceID
-                    Size = "{0:N2}" -f ($disk.Size / 1GB)
-                    Freespace = "{0:N2}" -f ($disk.Freespace / 1GB)
-                    PercentFree = $disk.PercentFree
+            foreach ($volume in $volumes) {
+                [PSCustomObject]@{
+                    ComputerName = $volume.SystemName
+                    Name = $volume.Name
+                    Capacity = "{0:N2}" -f ($volume.Capacity / 1GB)
+                    Freespace = "{0:N2}" -f ($volume.FreeSpace / 1GB)
+                    PercentFree = "{0:P0}" -f ($volume.FreeSpace / $volume.Capacity)
                 }
-                $obj = New-Object -TypeName PSObject -Property $info
-                Write-Output $obj
             }
         }
     }
